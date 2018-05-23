@@ -11,22 +11,13 @@ class Article(object):
         :param content: 内容
         :param label:   标签
         """
+        self.no = kwargs.get('no')
         self.author = kwargs.get('author')
         self.title = kwargs.get('title')
         self.content = kwargs.get('content')
-        self.label = kwargs.get('label')
+        self.category = kwargs.get('category')
+        self.views = kwargs.get('views')
 
     def dictify(self):
         d = dict(filter(lambda x: isinstance(x[1], (str, float, int, unicode)), self.__dict__.items()))
         return d
-
-if __name__ == '__main__':
-    d = {
-        'author': 'zz',
-        'title': 'zz',
-        'content': 'zzz',
-        'label': 'll'
-    }
-
-    a = Article(**d)
-    print a.dictify()

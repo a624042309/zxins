@@ -32,7 +32,8 @@ class ArticleRepository(object):
                 author=result.author,
                 title=result.title,
                 content=result.content,
-                label=result.label,
+                category=result.category,
+                views=result.views,
             )
             article = Article(**param)
             objs.append(article)
@@ -44,10 +45,12 @@ class ArticleRepository(object):
             result = self.session.query(ArticleModel).filter(ArticleModel, *criterion).one()
 
             param = dict(
+                no=result.no,
                 author=result.author,
                 title=result.title,
                 content=result.content,
-                label=result.label,
+                category=result.category,
+                views=result.views,
             )
             article = Article(**param)
 

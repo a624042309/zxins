@@ -15,5 +15,16 @@ class Controller(object):
             article_list = ar.find_all()
 
             return article_list
+
+        except:
+            traceback.print_exc()
+
+    def get_one_article(self, **kwargs):
+        try:
+            ar = ArticleRepository()
+            article = ar.find_one(**kwargs)
+
+            return article
+
         except:
             traceback.print_exc()
