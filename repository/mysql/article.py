@@ -28,12 +28,15 @@ class ArticleRepository(object):
 
         objs = []
         for result in results:
+            modified = str(result.modified).split(' ')[0]
             param = dict(
+                no=result.no,
                 author=result.author,
                 title=result.title,
                 content=result.content,
                 category=result.category,
                 views=result.views,
+                modified=modified,
             )
             article = Article(**param)
             objs.append(article)
@@ -42,7 +45,8 @@ class ArticleRepository(object):
     def find_one(self, **kwargs):
         try:
             criterion = [getattr(ArticleModel, i) == kwargs[i] for i in kwargs]
-            result = self.session.query(ArticleModel).filter(ArticleModel, *criterion).one()
+            result = self.session.query(ArticleModel).filter(*criterion).one()
+            modified = str(result.modified).split(' ')[0]
 
             param = dict(
                 no=result.no,
@@ -51,6 +55,7 @@ class ArticleRepository(object):
                 content=result.content,
                 category=result.category,
                 views=result.views,
+                modified=modified,
             )
             article = Article(**param)
 
@@ -58,3 +63,6 @@ class ArticleRepository(object):
 
         except NoResultFound:
             return None
+
+        except Exception as e:
+            raise e
