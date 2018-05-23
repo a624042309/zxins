@@ -1,4 +1,11 @@
+click==6.7
 Flask==1.0.2
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+meld3==1.0.2
 MySQL-python==1.2.5
 Schemer==0.2.11
 SQLAlchemy==1.2.7
+supervisor==3.3.4
+Werkzeug==0.14.1
