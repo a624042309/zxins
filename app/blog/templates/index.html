@@ -5,7 +5,7 @@
 <article class="post post-1">
     <header class="entry-header">
         <h1 class="entry-title">
-            <a href="{{ url_for('detail', id=article.no) }}">{{ article.title }}</a>
+            <a href="{{ url_for('detail', no=article.no) }}">{{ article.title }}</a>
         </h1>
         <div class="entry-meta">
             <span class="post-category"><a href="#">{{ article.category }}</a></span>
@@ -19,7 +19,7 @@
     <div class="entry-content clearfix">
         <p>{{ article.content }}</p>
         <div class="read-more cl-effect-14">
-            <a href="{{ url_for('detail', id=article.no) }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+            <a href="{{ url_for('detail', no=article.no) }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
         </div>
     </div>
 </article>
@@ -32,6 +32,7 @@
     <a href="#">下一页</a>
 </div>
 -->
+
 {#<div class="pagination">#}
 {#    <ul>#}
 {#        <li class="current"><a href="">1</a></li>#}

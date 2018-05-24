@@ -10,11 +10,13 @@ from app.blog.application.contro.controller import Controller
 def index():
     cl = Controller()
     article_list = cl.get_all_article()
+
     return render_template('index.html', article_list=article_list)
 
 
-@app.route('/detail/<id>', methods=['GET'])
-def detail(id):
+@app.route('/detail/<no>', methods=['GET'])
+def detail(no):
     cl = Controller()
-    article = cl.get_one_article(**dict(no=id))
+    article = cl.get_one_article(**dict(no=no))
+
     return render_template('detail.html', article=article)
