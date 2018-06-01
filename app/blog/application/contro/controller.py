@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import traceback
-from repository.mysql.article import ArticleRepository
+from repository.mysql.article_rep import ArticleRepository
 
 
 class Controller(object):
