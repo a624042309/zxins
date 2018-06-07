@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-# import markdown
-# from flask import Markup
 from sqlalchemy.orm.exc import NoResultFound
-from app.blog.application.entity.article_cls import Article
+from app.blog.entity.article_cls import Article
 from repository.mysql import get_session, ArticleModel
 
 

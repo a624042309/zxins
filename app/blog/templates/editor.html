@@ -1,0 +1,24 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+
+
+<form style="margin-left: 20px; margin-top: 20px" action="/write" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            <td>{{ form.account.label }}</td>
+            <td>{{ form.account(size=20) }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ form.passwd.label }}</td>
+            <td>{{ form.passwd(size=20) }}</td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="登录"></td>
+        </tr>
+    </table>
+</form>
+{% endblock content %}
