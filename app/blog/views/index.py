@@ -8,7 +8,9 @@ from app.blog.controller.controller import Controller
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', imgs=[1, 2, 3])
+    con = Controller()
+    hot = con.find_hot()
+    return render_template('index.html', hot=hot, imgs=[1, 2, 3, 4, 5, 6])
 
 
 @app.route('/write', methods=('GET', 'POST'))
@@ -22,11 +24,13 @@ def write():
             'content': content,
         }
         con = Controller()
-        con.create_article(param)
-        return render_template('preview.html', title=title, content=content)
+        article = con.create_article(param)
+        return render_template('article.html', article=article)
     return render_template('editor.html', form=form)
 
 
-@app.route('/article', methods=['POST'])
-def article():
-    return ''
+@app.route('/article/<id>', methods=['GET', 'POST'])
+def article(id):
+    con = Controller()
+    article = con.find_with_info(id=id)
+    return render_template('article.html', article=article)

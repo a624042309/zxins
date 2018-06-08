@@ -9,7 +9,7 @@
 {% endblock head%}
 
 {% block content %}
-<div style="margin-top: 100px">
+<div style="margin-top: 100px; width: 90%">
     <form style="margin-left: 20px; margin-top: 20px" action="/write" method="post" name="login">
         {{ form.hidden_tag() }}
         {{ form.csfr_token }}

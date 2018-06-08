@@ -7,36 +7,50 @@ from app.blog.entity.article_cls import Article
 from repository.mysql import get_session
 from repository.mysql.article_rep import ArticleRepository
 
+
 class Controller(object):
 
     def __init__(self):
         pass
 
-    def get_all_article(self):
+    def find_all(self):
+        """ 查全部 """
         try:
             ar = ArticleRepository()
             article_list = ar.find_all()
-
             return article_list
+        except:
+            traceback.print_exc()
+
+    def find_with_info(self, **kwargs):
+        """ 条件查 """
+        try:
+            ar = ArticleRepository()
+            article = ar.find_one(**kwargs)
+            return article
 
         except:
             traceback.print_exc()
 
-    def get_one_article(self, **kwargs):
+    def find_hot(self):
+        """ 查最热 """
         try:
             ar = ArticleRepository()
-            article = ar.find_one(**kwargs)
-
+            article = ar.find_hot()
             return article
 
         except:
             traceback.print_exc()
 
     def create_article(self, param):
+        """ 创建 """
+
         param_schema = Schema({
+            'id': {'type': basestring, 'required': False},
             'no': {'type': basestring, 'required': False},
             'author': {'type': basestring, 'required': False, 'default': 'zhuxin'},
             'title': {'type': basestring, 'required': True},
+            'intro': {'type': basestring, 'required': False},
             'content': {'type': basestring, 'required': True},
             'category': {'type': basestring, 'required': False, 'default': 'test'},
             'views': {'type': basestring, 'required': False},
@@ -47,22 +61,27 @@ class Controller(object):
         param_schema.apply_defaults(param)  # attach 默认值
 
         article_param = {
+            'id': param.get('id'),
             'no': param.get('no'),
             'author': param.get('author'),
             'title': param.get('title'),
+            'intro': param.get('intro'),
             'content': param.get('content'),
             'category': param.get('category'),
             'views': param.get('views'),
             'modified': param.get('modified')
         }
-        article = Article(**article_param)
+        session = get_session()
 
         try:
-            session = get_session()
+            article = Article(**article_param)
+
             ar = ArticleRepository(session)
             ar.save(article)
             session.commit()
             session.close()
+
+            return article
 
         except:
             traceback.print_exc()

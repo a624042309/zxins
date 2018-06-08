@@ -29,9 +29,11 @@ class ArticleRepository(object):
         for result in results:
             modified = str(result.modified).split(' ')[0]
             param = dict(
+                id=str(result.id),
                 no=result.no,
                 author=result.author,
                 title=result.title,
+                intor=result.intro,
                 content=result.content,
                 category=result.category,
                 views=result.views,
@@ -48,9 +50,11 @@ class ArticleRepository(object):
             modified = str(result.modified).split(' ')[0]
 
             param = dict(
+                id=str(result.id),
                 no=result.no,
                 author=result.author,
                 title=result.title,
+                intro=result.intro,
                 content=result.content,
                 category=result.category,
                 views=result.views,
@@ -66,6 +70,26 @@ class ArticleRepository(object):
         except Exception as e:
             raise e
 
+    def find_hot(self):
+        """ 查最新&浏览量最高的 """
+        views_sql = "select max(id) from article where views = (select max(views) from article)"
+        max_id = self.session.execute(views_sql).first()
+
+        model = self.session.query(ArticleModel).filter(ArticleModel.id == max_id['max(id)']).one()
+        param = {
+            'id': str(model.id),
+            'no': model.no,
+            'author': model.author,
+            'title': model.title,
+            'intro': model.intro,
+            'content': model.content,
+            'category': model.category,
+            'views': model.views,
+            'modified': str(model.modified)
+        }
+        article = Article(**param)
+        return article
+
     def save(self, article):
         try:
             import datetime
@@ -73,6 +97,7 @@ class ArticleRepository(object):
             model.no = article.no
             model.author = article.author
             model.title = article.title
+            model.intro = article.intro
             model.content = article.content
             model.category = article.category
             model.views = article.views
@@ -83,3 +108,8 @@ class ArticleRepository(object):
         except Exception as e:
             self.session.rollback()
             raise e
+
+if __name__ == '__main__':
+
+    ar = ArticleRepository()
+    ar.find_hot()
