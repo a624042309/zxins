@@ -109,7 +109,7 @@ class ArticleRepository(object):
             self.session.rollback()
             raise e
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     ar = ArticleRepository()
     ar.find_hot()
