@@ -43,7 +43,9 @@ class ArticleRepository(object):
                 )
                 article = Article(**param)
                 objs.append(article)
-        return objs
+
+        # TODO: 反转列表要改成数据库排序
+        return list(reversed(objs))
 
     def find_one(self, **kwargs):
         try:
