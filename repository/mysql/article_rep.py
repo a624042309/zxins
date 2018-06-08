@@ -23,24 +23,26 @@ class ArticleRepository(object):
             pass
 
     def find_all(self):
+        hot = self.find_hot()
         results = self.session.query(ArticleModel).all()
 
         objs = []
         for result in results:
-            modified = str(result.modified).split(' ')[0]
-            param = dict(
-                id=str(result.id),
-                no=result.no,
-                author=result.author,
-                title=result.title,
-                intor=result.intro,
-                content=result.content,
-                category=result.category,
-                views=result.views,
-                modified=modified,
-            )
-            article = Article(**param)
-            objs.append(article)
+            if int(result.id) != int(hot.id):
+                modified = str(result.modified).split(' ')[0]
+                param = dict(
+                    id=str(result.id),
+                    no=result.no,
+                    author=result.author,
+                    title=result.title,
+                    intro=result.intro,
+                    content=result.content,
+                    category=result.category,
+                    views=result.views,
+                    modified=modified,
+                )
+                article = Article(**param)
+                objs.append(article)
         return objs
 
     def find_one(self, **kwargs):
@@ -112,4 +114,4 @@ class ArticleRepository(object):
 
 if __name__ == '__main__':
     ar = ArticleRepository()
-    ar.find_hot()
+    ar.find_all()

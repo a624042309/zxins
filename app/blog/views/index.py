@@ -10,7 +10,8 @@ from app.blog.controller.controller import Controller
 def index():
     con = Controller()
     hot = con.find_hot()
-    return render_template('index.html', hot=hot, imgs=[1, 2, 3, 4, 5, 6])
+    items = con.find_all()
+    return render_template('index.html', hot=hot, items=items)
 
 
 @app.route('/write', methods=('GET', 'POST'))
