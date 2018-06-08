@@ -66,3 +66,20 @@ class ArticleRepository(object):
         except Exception as e:
             raise e
 
+    def save(self, article):
+        try:
+            import datetime
+            model = ArticleModel()
+            model.no = article.no
+            model.author = article.author
+            model.title = article.title
+            model.content = article.content
+            model.category = article.category
+            model.views = article.views
+            model.created = datetime.datetime.now()
+            model.modified = datetime.datetime.now()
+            self.session.add(model)
+
+        except Exception as e:
+            self.session.rollback()
+            raise e

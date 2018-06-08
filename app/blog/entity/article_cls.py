@@ -14,13 +14,13 @@ class Article(object):
         """
 
         param_schema = Schema({
-            'no': {'type': basestring, 'required': True},
+            'no': {'type': basestring, 'required': False},
             'author': {'type': basestring, 'required': True},
             'title': {'type': basestring, 'required': True},
             'content': {'type': basestring, 'required': True},
-            'category': {'type': basestring, 'required': True},
-            'views': {'type': basestring, 'required': True},
-            'modified': {'type': basestring, 'required': True},
+            'category': {'type': basestring, 'required': False},
+            'views': {'type': basestring, 'required': False},
+            'modified': {'type': basestring, 'required': False},
 
         })
 

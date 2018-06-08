@@ -1,24 +1,23 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} 编辑 {% endblock title %}
+
+{% block head%}
+{{ super() }}
+<script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
+{% endblock head%}
 
 {% block content %}
-
-
-<form style="margin-left: 20px; margin-top: 20px" action="/write" method="post" name="login">
-    {{ form.hidden_tag() }}
-    <table>
-        <tr>
-            <td>{{ form.account.label }}</td>
-            <td>{{ form.account(size=20) }}</td>
-        </tr>
-
-        <tr>
-            <td>{{ form.passwd.label }}</td>
-            <td>{{ form.passwd(size=20) }}</td>
-        </tr>
-
-        <tr>
-            <td><input type="submit" value="登录"></td>
-        </tr>
-    </table>
-</form>
+<div style="margin-top: 100px">
+    <form style="margin-left: 20px; margin-top: 20px" action="/write" method="post" name="login">
+        {{ form.hidden_tag() }}
+        {{ form.csfr_token }}
+        {{ form.title.label }}<br>
+        {{ form.title(size=150) }}<br><br>
+        {{ form.content.label }}<br>
+        {{ form.content(class="ckeditor") }}<br>
+        <input type="submit">
+    </form>
+</div>
 {% endblock content %}
