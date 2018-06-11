@@ -10,5 +10,6 @@ class UserForm(FlaskForm):
 
 class EditorForm(FlaskForm):
     title = StringField(u'标题:', validators=[DataRequired(u'请输入标题.')])
+    intro = StringField(u'简介:')
     content = TextAreaField(u'内容:', validators=[DataRequired(u'请输入内容.')])
     submit = SubmitField(u'提交')

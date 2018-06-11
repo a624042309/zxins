@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, request, url_for
+from flask import render_template
 from app.blog.blog_config import app
 from app.blog.controller.forms import EditorForm
 from app.blog.controller.controller import Controller
@@ -20,9 +20,11 @@ def write():
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
+        intro = form.intro.data
         param = {
             'title': title,
             'content': content,
+            'intro': intro,
         }
         con = Controller()
         article = con.create_article(param)
