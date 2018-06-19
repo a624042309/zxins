@@ -37,3 +37,8 @@ def article(id):
     con = Controller()
     article = con.find_with_info(id=id)
     return render_template('article.html', article=article)
+
+
+@app.route('/video')
+def video():
+    return render_template('video.html')
