@@ -5,14 +5,13 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 
 app = Flask(__name__)
-app.secret_key = 'key secret zxins'
+app.secret_key = 'key-secret-zxins'
 app.config['CKEDITOR_SERVE_LOCAL'] = True
 app.config['CKEDITOR_HEIGHT'] = 400
-# enable markdown plugin
-app.config['CKEDITOR_ENABLE_MARKDOWN'] = True
+app.config['CKEDITOR_ENABLE_MARKDOWN'] = True # enable markdown plugin
 
-Bootstrap(app)
 ckeditor = CKEditor(app)
+Bootstrap(app)
 
 app_host = '0.0.0.0'
 app_port = '8888'
