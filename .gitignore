@@ -106,5 +106,5 @@ venv.bak/
 .mypy_cache/
 
 .DS_Store
-.idea
-.mp4
+.idea/
+*.mp4
