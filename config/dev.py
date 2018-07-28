@@ -2,5 +2,5 @@
 
 # mysql数据库配置
 MYSQL_HOST = 'localhost'
-MYSQL_USER = 'admin'
-MYSQL_PASS = 'demo'
+MYSQL_USER = 'root'
+MYSQL_PASS = 'Zx3620382.'
